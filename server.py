@@ -7,7 +7,11 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return send_file('index.html')
-
+    
+@app.route('/style.css')
+def style():
+    return send_file('style.css')
+    
 @app.route('/script.js')
 def script():
     return send_file('script.js')
