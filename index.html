@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <title>VES Generátor</title>
+    <style>
+        /* Aj keď si nechcel CSS, pridal som len minimum pre lepšie zobrazenie textarea, inak by to bolo veľmi malé. */
+        textarea {
+            width: 100%;
+            height: 150px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generátor obrázkov (ves.py)</h1>
+    
+    <div>
+        <label for="vesInput">Zadajte kód VES:</label><br>
+        <textarea id="vesInput" placeholder="VES 1.0 200 200&#10;CLEAR #FFFFFF&#10;CIRCLE 100 100 50 2 #000000"></textarea>
+        <br>
+        <button id="generateBtn">Vytvoriť obrázok</button>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <p id="status"></p>
+        <div id="imageContainer"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
