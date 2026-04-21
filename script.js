@@ -137,10 +137,17 @@ window.addEventListener('resize', () => {
 
 // --- YouTube prehrávač (Skyrim Ambient) ---
 let player;
+
+// Načítanie YouTube API asynchrónne
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 window.onYouTubeIframeAPIReady = function() {
     player = new YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
+        height: '1',
+        width: '1',
         videoId: 'YKJ-fkbMOOg', // Skyrim Ambient Music
         playerVars: {
             'autoplay': 1,
