@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
-    --matrix-green: #00FF41;
+    --matrix-color: #B20000; /* Tmavočervená (Dark Red) */
+    --matrix-color-bright: #FF1A1A; /* Jasnejšia červená pre glow efekty */
     --matrix-dark: #000000;
-    --matrix-glow: 0 0 5px #00FF41, 0 0 10px #00FF41;
+    --matrix-glow: 0 0 5px var(--matrix-color), 0 0 10px var(--matrix-color);
 }
 
 body {
@@ -11,7 +12,7 @@ body {
     min-height: 100vh;
     font-family: 'VT323', 'Courier New', Courier, monospace;
     background-color: var(--matrix-dark);
-    color: var(--matrix-green);
+    color: var(--matrix-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,14 +27,23 @@ body {
     );
 }
 
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
 .container {
     width: 100%;
     max-width: 720px;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 4px;
     padding: 30px;
-    border: 1px solid var(--matrix-green);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2), inset 0 0 15px rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--matrix-color);
+    box-shadow: 0 0 15px rgba(178, 0, 0, 0.2), inset 0 0 15px rgba(178, 0, 0, 0.1);
 }
 
 h1 {
@@ -50,56 +60,56 @@ label {
     display: inline-block;
     margin-bottom: 10px;
     font-size: 1.2rem;
-    text-shadow: 0 0 2px var(--matrix-green);
+    text-shadow: 0 0 2px var(--matrix-color);
 }
 
 textarea {
     width: 100%;
     min-height: 200px;
     resize: vertical;
-    border: 1px solid var(--matrix-green);
+    border: 1px solid var(--matrix-color);
     border-radius: 4px;
     padding: 15px;
     box-sizing: border-box;
     font-family: 'VT323', 'Courier New', Courier, monospace;
     font-size: 1.2rem;
-    background-color: rgba(0, 20, 0, 0.5);
-    color: var(--matrix-green);
+    background-color: rgba(20, 0, 0, 0.5);
+    color: var(--matrix-color);
     outline: none;
     line-height: 1.5;
-    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
+    box-shadow: inset 0 0 10px rgba(178, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 textarea:focus {
-    box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.3), 0 0 10px rgba(0, 255, 65, 0.2);
-    border-color: #00ff66;
+    box-shadow: inset 0 0 15px rgba(255, 26, 26, 0.3), 0 0 10px rgba(255, 26, 26, 0.2);
+    border-color: var(--matrix-color-bright);
 }
 
 textarea::placeholder {
-    color: rgba(0, 255, 65, 0.4);
+    color: rgba(178, 0, 0, 0.4);
 }
 
 button {
     margin-top: 20px;
     padding: 12px 24px;
-    border: 1px solid var(--matrix-green);
+    border: 1px solid var(--matrix-color);
     border-radius: 4px;
     cursor: pointer;
     font-family: 'VT323', 'Courier New', Courier, monospace;
     font-size: 1.4rem;
     font-weight: bold;
     background-color: transparent;
-    color: var(--matrix-green);
+    color: var(--matrix-color);
     text-transform: uppercase;
     transition: all 0.2s ease;
-    box-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 5px rgba(178, 0, 0, 0.2);
 }
 
 button:hover {
-    background-color: var(--matrix-green);
+    background-color: var(--matrix-color);
     color: var(--matrix-dark);
-    box-shadow: 0 0 15px var(--matrix-green), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px var(--matrix-color), inset 0 0 10px rgba(0, 0, 0, 0.5);
     transform: scale(1.02);
 }
 
@@ -112,7 +122,7 @@ button:active {
     margin-bottom: 0;
     min-height: 24px;
     font-size: 1.2rem;
-    text-shadow: 0 0 3px var(--matrix-green);
+    text-shadow: 0 0 3px var(--matrix-color);
 }
 
 #imageContainer {
@@ -125,12 +135,12 @@ button:active {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
-    border: 1px solid var(--matrix-green);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+    border: 1px solid var(--matrix-color);
+    box-shadow: 0 0 20px rgba(178, 0, 0, 0.4);
     background: black;
 }
 
 ::selection {
-    background: var(--matrix-green);
+    background: var(--matrix-color);
     color: var(--matrix-dark);
 }
