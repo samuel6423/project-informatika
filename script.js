@@ -162,3 +162,25 @@ document.body.addEventListener('click', function() {
         player.playVideo();
     }
 }, { once: true });
+
+// --- Myšové častice (Particles) ---
+window.addEventListener('mousemove', function(e) {
+    if (!ctx) return;
+    
+    // Pri pohybe myši nakreslíme zopár náhodných znakov okolo kurzora
+    // Tým, že canvas sa automaticky stmavuje (v drawMatrix), vytvorí to efekt plynule miznúcej stopy
+    const numParticles = 2; // Počet znakov pri každom pohnutí
+    
+    ctx.fillStyle = '#FF1A1A'; // Jasná červená pre kurzorové častice
+    ctx.font = fontSize + 'px "VT323", monospace';
+    
+    for (let i = 0; i < numParticles; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        
+        // Náhodný rozptyl okolo myši (napr. +- 15 pixelov)
+        const offsetX = (Math.random() - 0.5) * 30;
+        const offsetY = (Math.random() - 0.5) * 30;
+        
+        ctx.fillText(text, e.clientX + offsetX, e.clientY + offsetY);
+    }
+});
