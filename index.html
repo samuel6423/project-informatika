@@ -5,16 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VES Generátor</title>
-    <style>
-        /* Aj keď si nechcel CSS, pridal som len minimum pre lepšie zobrazenie textarea, inak by to bolo veľmi malé. */
-        textarea {
-            width: 100%;
-            height: 150px;
-            font-family: monospace;
-        }
-    </style>
 </head>
 <body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <!-- Skrytý YouTube prehrávač pre Skyrim hudbu -->
+    <div id="youtube-player" style="position: absolute; width: 1px; height: 1px; top: -9999px; left: -9999px;"></div>
+
     <div class="container">
         <h1>Generátor obrázkov (ves.py)</h1>
         
@@ -27,7 +24,6 @@
                 <button id="randomVesBtn">Náhodný VES s tvarmi</button>
             </div>
         </div>
-
         <div style="margin-top: 20px;">
             <p id="status"></p>
             <div id="imageContainer"></div>

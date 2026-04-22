@@ -86,3 +86,108 @@ document.getElementById('randomVesBtn').addEventListener('click', function() {
     document.getElementById('vesInput').value = ves;
     document.getElementById('generateBtn').click(); // Automaticky vygeneruje obrázok
 });
+
+// --- Matrix pozadie ---
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'.split('');
+const fontSize = 16;
+let columns = Math.floor(canvas.width / fontSize);
+
+let drops = [];
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+}
+
+function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = '#B20000';
+    ctx.font = fontSize + 'px "VT323", monospace';
+    
+    for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+
+setInterval(drawMatrix, 40);
+
+window.addEventListener('resize', () => {
+    resizeCanvas();
+    columns = Math.floor(canvas.width / fontSize);
+    drops = [];
+    for (let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+});
+
+// --- YouTube prehrávač (Skyrim Ambient) ---
+let player;
+
+// Načítanie YouTube API asynchrónne
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('youtube-player', {
+        height: '1',
+        width: '1',
+        videoId: 'YKJ-fkbMOOg', // Skyrim Ambient Music
+        playerVars: {
+            'autoplay': 1,
+            'loop': 1,
+            'playlist': 'YKJ-fkbMOOg',
+            'controls': 0
+        },
+        events: {
+            'onReady': function(event) {
+                event.target.playVideo();
+            }
+        }
+    });
+};
+
+// Poistka: spustenie po prvom kliknutí (kvôli ochrane prehliadačov)
+document.body.addEventListener('click', function() {
+    if (player && typeof player.playVideo === 'function') {
+        player.playVideo();
+    }
+}, { once: true });
+
+// --- Myšové častice (Particles) ---
+window.addEventListener('mousemove', function(e) {
+    if (!ctx) return;
+    
+    // Pri pohybe myši nakreslíme zopár náhodných znakov okolo kurzora
+    // Tým, že canvas sa automaticky stmavuje (v drawMatrix), vytvorí to efekt plynule miznúcej stopy
+    const numParticles = 2; // Počet znakov pri každom pohnutí
+    
+    ctx.fillStyle = '#FF1A1A'; // Jasná červená pre kurzorové častice
+    ctx.font = fontSize + 'px "VT323", monospace';
+    
+    for (let i = 0; i < numParticles; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        
+        // Náhodný rozptyl okolo myši (napr. +- 15 pixelov)
+        const offsetX = (Math.random() - 0.5) * 30;
+        const offsetY = (Math.random() - 0.5) * 30;
+        
+        ctx.fillText(text, e.clientX + offsetX, e.clientY + offsetY);
+    }
+});

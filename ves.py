@@ -92,28 +92,22 @@ def fill_rect(img, A, B, color):
   ax, ay = A
   width, height = B
   bx, by = ax + width, ay + height
+  img_w, img_h = img.size
 
-  if ax < bx and ay > by:
+  if ax > bx:
+    ax, bx = bx, ax
+  if ay > by:
     ay, by = by, ay
-    for x in range(ax, bx):
-      for y in range(ay, by):
-        img.putpixel((x, y), color)
-  elif ax < bx and ay < by:
-    for x in range(ax, bx):
-      for y in range(ay, by):
-        img.putpixel((x, y), color)
 
-  elif ax > bx and ay > by:
-    ax, bx = bx, ax
-    ay, by = by, ay
-    for x in range(ax, bx):
-      for y in range(ay, by):
-        img.putpixel((x, y), color)
-  elif ax > bx and ay < by:
-    ax, bx = bx, ax
-    for x in range(ax, bx):
-      for y in range(ay, by):
-        img.putpixel((x, y), color)
+  # Clip to image bounds
+  ax = max(0, min(ax, img_w))
+  bx = max(0, min(bx, img_w))
+  ay = max(0, min(ay, img_h))
+  by = max(0, min(by, img_h))
+
+  for x in range(ax, bx):
+    for y in range(ay, by):
+      img.putpixel((x, y), color)
 def triangle(obrazok, A, B, C, hrubka, color):
   thick_line(obrazok, A, B, hrubka, color)
   thick_line(obrazok, B, C, hrubka, color)
@@ -368,7 +362,10 @@ def render_ves(ves_string, target_width=None):
           (int(subor[i][3]), int(subor[i][4])),
           farbaz16do10(subor[i][5].strip()))
     except Exception as e:
-      print(f"Error parsing line {i}: {e}")
+      try:
+        print(f"Error parsing line {i}: {e}")
+      except OSError:
+        pass
       
   if target_width:
     target_width = int(target_width)

@@ -1,104 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+    --matrix-color: #B20000; /* Tmavočervená (Dark Red) */
+    --matrix-color-bright: #FF1A1A; /* Jasnejšia červená pre glow efekty */
+    --matrix-dark: #000000;
+    --matrix-glow: 0 0 5px var(--matrix-color), 0 0 10px var(--matrix-color);
+}
+
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #1e1e2f, #2c2c54);
-    color: white;
+    font-family: 'VT323', 'Courier New', Courier, monospace;
+    background-color: var(--matrix-dark);
+    color: var(--matrix-color);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+}
+
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
 }
 
 .container {
     width: 100%;
     max-width: 720px;
-    background: rgba(47, 47, 70, 0.96);
-    border-radius: 18px;
-    padding: 28px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    padding: 30px;
+    border: 1px solid var(--matrix-color);
+    box-shadow: 0 0 15px rgba(178, 0, 0, 0.2), inset 0 0 15px rgba(178, 0, 0, 0.1);
 }
 
 h1 {
     margin-top: 0;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    text-shadow: var(--matrix-glow);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 label {
     display: inline-block;
-    margin-bottom: 8px;
-    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    text-shadow: 0 0 2px var(--matrix-color);
 }
 
 textarea {
     width: 100%;
-    min-height: 180px;
+    min-height: 200px;
     resize: vertical;
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
+    border: 1px solid var(--matrix-color);
+    border-radius: 4px;
+    padding: 15px;
     box-sizing: border-box;
-    font-family: monospace;
-    font-size: 14px;
-    background: #1e1e2f;
-    color: white;
+    font-family: 'VT323', 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    background-color: rgba(20, 0, 0, 0.5);
+    color: var(--matrix-color);
     outline: none;
     line-height: 1.5;
+    box-shadow: inset 0 0 10px rgba(178, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+textarea:focus {
+    box-shadow: inset 0 0 15px rgba(255, 26, 26, 0.3), 0 0 10px rgba(255, 26, 26, 0.2);
+    border-color: var(--matrix-color-bright);
 }
 
 textarea::placeholder {
-    color: #b7b7c9;
+    color: rgba(178, 0, 0, 0.4);
 }
 
 button {
-    margin-top: 14px;
-    padding: 11px 18px;
-    border: none;
-    border-radius: 10px;
+    margin-top: 20px;
+    padding: 12px 24px;
+    border: 1px solid var(--matrix-color);
+    border-radius: 4px;
     cursor: pointer;
+    font-family: 'VT323', 'Courier New', Courier, monospace;
+    font-size: 1.4rem;
     font-weight: bold;
-    background: #6c5ce7;
-    color: white;
-    transition: transform 0.15s ease, background 0.15s ease;
+    background-color: transparent;
+    color: var(--matrix-color);
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 5px rgba(178, 0, 0, 0.2);
 }
 
 button:hover {
-    background: #8472ff;
-    transform: translateY(-1px);
+    background-color: var(--matrix-color);
+    color: var(--matrix-dark);
+    box-shadow: 0 0 15px var(--matrix-color), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.02);
 }
 
 button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
 }
 
 #status {
-    margin-top: 16px;
+    margin-top: 20px;
     margin-bottom: 0;
     min-height: 24px;
-    color: #f1f1f1;
+    font-size: 1.2rem;
+    text-shadow: 0 0 3px var(--matrix-color);
 }
 
 #imageContainer {
-    margin-top: 16px;
+    margin-top: 20px;
+    text-align: center;
 }
 
 #imageContainer img {
-    display: block;
+    display: inline-block;
     max-width: 100%;
     height: auto;
-    border-radius: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    background: white;
+    border-radius: 4px;
+    border: 1px solid var(--matrix-color);
+    box-shadow: 0 0 20px rgba(178, 0, 0, 0.4);
+    background: black;
 }
 
 .buttons {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
     margin-top: 14px;
 }
@@ -115,7 +159,7 @@ button:active {
     
     .container {
         padding: 15px;
-        border-radius: 12px;
+        border-radius: 4px;
     }
 
     h1 {
@@ -134,4 +178,9 @@ button:active {
     textarea {
         min-height: 120px;
     }
+}
+
+::selection {
+    background: var(--matrix-color);
+    color: var(--matrix-dark);
 }
