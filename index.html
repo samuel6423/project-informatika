@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="/style.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VES Generátor</title>
     <style>
         /* Aj keď si nechcel CSS, pridal som len minimum pre lepšie zobrazenie textarea, inak by to bolo veľmi malé. */
@@ -14,19 +15,23 @@
     </style>
 </head>
 <body>
-    <h1>Generátor obrázkov (ves.py)</h1>
-    
-    <div>
-        <label for="vesInput">Zadajte kód VES:</label><br>
-        <textarea id="vesInput" placeholder="VES 1.0 200 200&#10;CLEAR #FFFFFF&#10;CIRCLE 100 100 50 2 #000000"></textarea>
-        <br>
-        <button id="generateBtn">Vytvoriť obrázok</button>
-        <button id="randomVesBtn" style="margin-left: 10px;">Náhodný VES s tvarmi</button>
-    </div>
+    <div class="container">
+        <h1>Generátor obrázkov (ves.py)</h1>
+        
+        <div>
+            <label for="vesInput">Zadajte kód VES:</label><br>
+            <textarea id="vesInput" placeholder="VES 1.0 200 200&#10;CLEAR #FFFFFF&#10;CIRCLE 100 100 50 2 #000000"></textarea>
+            <br>
+            <div class="buttons">
+                <button id="generateBtn">Vytvoriť obrázok</button>
+                <button id="randomVesBtn">Náhodný VES s tvarmi</button>
+            </div>
+        </div>
 
-    <div style="margin-top: 20px;">
-        <p id="status"></p>
-        <div id="imageContainer"></div>
+        <div style="margin-top: 20px;">
+            <p id="status"></p>
+            <div id="imageContainer"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>

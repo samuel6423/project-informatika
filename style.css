@@ -95,3 +95,43 @@ button:active {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     background: white;
 }
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.buttons button {
+    margin-top: 0; /* Resetujeme margin-top, lebo používame gap */
+}
+
+/* Responzívny dizajn pre menšie obrazovky (mobily) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+
+    textarea {
+        min-height: 120px;
+    }
+}
